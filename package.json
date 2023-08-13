@@ -1,0 +1,46 @@
+{
+  "name": "culqi-aws-tokenize",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "unit": "jest",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src/",
+    "compile": "tsc",
+    "test": "npm run compile && npm run unit",
+    "sam-local": "sam build && sam local start-api",
+    "sam-prod": "sam build && sam deploy --stack-name MyLambdaAppStack --region us-east-1 --capabilities CAPABILITY_IAM"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.119",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1429.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.3.1",
+    "esbuild": "^0.14.14",
+    "http-status": "^1.6.2",
+    "inversify": "^6.0.1",
+    "luhn": "^2.4.1",
+    "mongoose": "^7.4.1",
+    "reflect-metadata": "^0.1.13",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-typescript": "^7.22.5",
+    "@types/crypto-js": "^4.1.1",
+    "@types/inversify": "^2.0.33",
+    "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "esbuild-jest": "^0.5.0",
+    "eslint": "^8.46.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "jest": "^27.5.0",
+    "ts-node": "^10.9.1"
+  }
+}

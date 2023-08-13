@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Card-tokenized-lambda
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  GenerateCardTokenFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.generateCardTokenLambdaHandler
+      Runtime: nodejs18.x
+      Timeout: 60
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /generate-card-token
+            Method: post
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        EntryPoints: 
+        - app.ts
+  GetCardNumberFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.getCardNumberLambdaHandler
+      Runtime: nodejs18.x
+      Timeout: 60
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /get-card-number
+            Method: get
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        EntryPoints: 
+        - app.ts
+Outputs:
+  GenerateCardTokenFunction:
+    Description: "Genera token para guardar datos de manera segura de una tarjeta de crédito / débito"
+    Value: !GetAtt tokenizeCardFunction.Arn
+  GetCardNumberFunction:
+    Description: "Obtiene los datos de la tarjeta por medio del token generado"
+    Value: !GetAtt tokenizeCardFunction.Arn
